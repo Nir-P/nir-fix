@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>טפל לי בטקסט</title>
+    <link rel="stylesheet" href="static/style.css"/>
+    <link rel="icon" href="static/NP.ico" type="image/x-icon" />
+    <style>
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <body>
+  </head>
+    <div class="header">
+      <img src="static/Nirp.png" alt="nir logo" id="nir_logo">
+      <h1>טפל לי בטקסט</h1>
+    </div>
+    <div class="input_output">
+      <div class="input_side">
+        <form method="post">
+            <h2><label for="text">נא הכנס טקסט:</label><br></h2>
+            <textarea id="text" name="input_text" rows="10" cols="60">{{ input_text }}</textarea><br>
+            <input id="row_comma" name="row_comma" type="checkbox">
+            <label for="row_comma">הפרדת שורות שמופיע בהן פסיק</label><br>
+            <input id="replace_words" name="replace_words" type="checkbox">
+            <label for="replace_words">החלפת מילים</label>
+            <div class="replace_words_content">
+              <label for="change_word">החלף את המילה</label>
+              <input id="change_word" name="change_word" type="text" value="{{ change_word }}">
+              <label for="in_word">במילה</label>
+              <input id="in_word" name="in_word" type="text" value="{{ in_word }}">
+            </div><br>
+            <input id="text_rev" name="text_rev" type="checkbox">
+            <label for="text_rev">היפוך טקסט</label><br>
+            <input id="remove_special" name="remove_special" type="checkbox">
+            <label for="remove_special">מחיקת תווים מיוחדים</label><br>
+            <input type="submit" value="בצע" id="submit">   
+        </form>
+      </div>
+      <div class="output_side site_border">
+        <div>
+            <h2><label for="result">פלט:</label><br></h2>
+            <textarea id="result" name="output_text" rows="10" cols="60"{% if output_text is not defined %} disabled {% endif %}>{{ output_text }}</textarea>
+        </div>
+        <div>
+            <h2> סטטיסטיקה ונתונים נוספים</h2>
+            <p>שפה: {{ response_lang }}</p>
+            <label for="count_words">כמות המילים בטקסט:</label>
+            <input id="count_words" type="text" value ="{{ count_words }}" disabled><br>
+            <label for="most_common">המילה בעלת מספר החזרות הרב ביותר:</label>
+            <input id="most_common" type="text" value="{{ most_common }}" disabled><br>
+            <label for="most_common_appearance">מספר הופעות של המילה:</label>
+            <input id="most_common_appearance" type="text" value="{{ most_common_appearance }}" disabled><br>
+        </div>
+      </div>
+    </div>
+    <footer class="site_border">
+        <p class="center_text">כל הזכויות שמורות © ניר פרלשטיין 2020.</p>
+    </footer>
+  </body>
+
+</html>
