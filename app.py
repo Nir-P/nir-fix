@@ -1,9 +1,9 @@
-import requests
-
 import collections
 import os
 
 from flask import Flask, render_template, request
+import requests
+
 
 def get_lang():
     country_init = {}
@@ -31,7 +31,7 @@ def replace_words_in_text(text, old_word, new_word):
 def reverse_text(text):
     text_lines = text.split("\n")
     for line_num in range(len(text_lines)):
-        text_lines[line_num] =  text_lines[line_num].split(" ")[::-1]
+        text_lines[line_num] = text_lines[line_num].split(" ")[::-1]
         for word_num in range(len(text_lines[line_num])):
             text_lines[line_num][word_num] = text_lines[line_num][word_num][::-1]
         text_lines[line_num] = " ".join(text_lines[line_num])
@@ -67,6 +67,7 @@ def most_common_word(text):
     else:
         return ""
 
+
 get_language = get_lang()
 token = os.environ.get("API_Key")
 link_detectlan = "https://ws.detectlanguage.com/0.2/detect"
@@ -93,16 +94,16 @@ def index():
             output_text = remove_special_characters(output_text)
 
         count_words_result = count_words(output_text)
-        common_word_result, most_appearance_result  = most_common_word(output_text)[0]
+        common_word_result, most_appearance_result = most_common_word(output_text)[0]
 
         value_t = input_text
         try:
-            response_lan = requests.post(link_detectlan, data={key_t : value_t}, headers=headers).json()
+            response_lan = requests.post(link_detectlan, data={key_t: value_t}, headers=headers).json()
             response_lan = response_lan["data"]["detections"][0]["language"]
             res_lang = get_language[response_lan]
         except KeyError:
             res_lang = "Error"
 
-        return render_template("index.html", input_text=input_text, output_text=output_text, count_words=count_words_result, most_common=common_word_result, most_common_appearance = most_appearance_result, response_lang=res_lang)
+        return render_template("index.html", input_text=input_text, output_text=output_text, count_words=count_words_result, most_common=common_word_result, most_common_appearance=most_appearance_result, response_lang=res_lang)
     return render_template("index.html")
 
