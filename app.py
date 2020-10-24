@@ -51,7 +51,7 @@ def count_words(text):
 
 
 def replace_special_characters(word):
-    SPECIAL_CHARACTERS = [".", "(", ")", "!", "?"]
+    SPECIAL_CHARACTERS = [".", "(", ")", "!", "?", ",", ":"]
     for special_character in SPECIAL_CHARACTERS:
         word = word.replace(special_character, "")
     return word
