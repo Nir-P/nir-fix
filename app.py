@@ -1,6 +1,7 @@
 import requests
 
 import collections
+import os
 
 from flask import Flask, render_template, request
 
@@ -64,10 +65,10 @@ def most_common_word(text):
         return ""
 
 get_language = get_lang()
-TOKEN = "Bearer Your API Key"
+token = os.environ.get("API Key")
 link_detectlan = "https://ws.detectlanguage.com/0.2/detect"
 key_t = "q"
-headers = {"Authorization": TOKEN}
+headers = {"Authorization": token}
 app = Flask(__name__)
 
 
