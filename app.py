@@ -17,7 +17,7 @@ def get_lang():
 def separate_comma_to_rows(text):
     new_text = []
     for row in text.split(","):
-        if row[0] == " ":
+        if row != "" and row[0] == " ":
             row = row[1:]
         new_text.append(row)
     return "\n".join(new_text)
