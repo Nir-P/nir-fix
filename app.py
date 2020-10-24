@@ -29,10 +29,13 @@ def replace_words_in_text(text, old_word, new_word):
 
 
 def reverse_text(text):
-    rev_text = text.split(" ")
-    for word_num in range(len(rev_text)):
-        rev_text[word_num] = rev_text[word_num][::-1]
-    return " ".join(rev_text[::-1])
+    text_lines = text.split("\n")
+    for line_num in range(len(text_lines)):
+        text_lines[line_num] =  text_lines[line_num].split(" ")[::-1]
+        for word_num in range(len(text_lines[line_num])):
+            text_lines[line_num][word_num] = text_lines[line_num][word_num][::-1]
+        text_lines[line_num] = " ".join(text_lines[line_num])
+    return "".join(text_lines[::-1])
 
 
 def remove_special_characters(text):
@@ -43,7 +46,7 @@ def remove_special_characters(text):
         
 
 def count_words(text):
-    count_words_without_spaces = [word for word in text.replace("\n", " ").split(" ") if word != " "]
+    count_words_without_spaces = [word for word in text.replace("\n", " ").split(" ") if word != " " and word != "" and word != "\r"]
     return len(count_words_without_spaces)
 
 
@@ -65,7 +68,7 @@ def most_common_word(text):
         return ""
 
 get_language = get_lang()
-token = os.environ.get("API_Key")
+token = os.environ.get("API_Keyi")
 link_detectlan = "https://ws.detectlanguage.com/0.2/detect"
 key_t = "q"
 headers = {"Authorization": token}
@@ -87,7 +90,7 @@ def index():
         if "text_rev" in rf and rf["text_rev"] == "on":
             output_text = reverse_text(output_text)
         if "remove_special" in rf and rf["remove_special"] == "on":
-            output_text = replace_special_characters(output_text)
+            output_text = remove_special_characters(output_text)
 
         count_words_result = count_words(output_text)
         common_word_result, most_appearance_result  = most_common_word(output_text)[0]
