@@ -68,7 +68,7 @@ def most_common_word(text):
         return ""
 
 get_language = get_lang()
-token = os.environ.get("API_Keyi")
+token = os.environ.get("API_Key")
 link_detectlan = "https://ws.detectlanguage.com/0.2/detect"
 key_t = "q"
 headers = {"Authorization": token}
